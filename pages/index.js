@@ -1,26 +1,31 @@
 import Head from "next/head";
 import Router from "next/router";
-import { firebase, auth } from "../config/firebase";
+import Link from "next/link";
+
+import { firebase } from "../config/firebase";
+
+import styles from "../styles/Landing.module.css";
+import Navbar from "../components/Navbar/";
 
 const LoginPage = () => {
   const user = firebase.auth().currentUser;
   return (
-    <div>
-      {user ? (
-        <div>
-          <div>{user.displayName}</div>
-          <button
-            onClick={() => {
-              Router.push("/dashboard");
-            }}
-          >
-            DashBoard
-          </button>
-          <button onClick={signout}>Signout</button>
-        </div>
-      ) : (
-        <button onClick={signin}>Sign In</button>
-      )}
+    <div className={styles.container}>
+      <Navbar></Navbar>
+      <header className={styles.header}>PDS Band Contest 2020</header>
+      <section>
+        <h2 className={styles.sectionHeader}>Band</h2>
+      </section>
+      <section>
+        <h2 className={styles.sectionHeader}>Band</h2>
+      </section>
+      <section>
+        <h2 className={styles.sectionHeader}>Follow Us</h2>
+      </section>
+      <footer>
+        PDS Student Committee 2020 | ⌨️ with ❤️ by{" "}
+        <Link href="https://github.com/pdscc/bandcontest">PDSCC</Link>
+      </footer>
     </div>
   );
 };
@@ -36,6 +41,8 @@ const signin = () => {
       // The signed-in user info.
       const user = result.user;
       // ...
+      console.log(result.user);
+      localStorage.setItem("bandcontest_user", JSON.stringify(result.user));
       Router.push("/dashboard");
     })
     .catch(function (error) {
@@ -55,6 +62,7 @@ const signout = () => {
     .auth()
     .signOut()
     .then(() => {
+      localStorage.removeItem("login");
       Router.push("/");
     })
     .catch(function (error) {

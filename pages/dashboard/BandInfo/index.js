@@ -1,48 +1,67 @@
 import { useState, useEffect } from "react";
+import { firebase } from "../../../config/firebase";
 
 const BandInfo = () => {
-  const [data, setData] = useState({
+  const [band, setBand] = useState({
     bandName: "",
-    member: {},
-    url: { original: "", recompose: "" },
+    member: {
+      drummer: "",
+      vocalist: "",
+      pianist: "",
+    },
+    url: {
+      original: "",
+      recompose: "",
+    },
+    request: {},
   });
-  console.log(data);
 
-  const fetchData = () => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve({
-          bandName: "pub",
-          member: {
-            drummer: "pfd",
-            vocalist: "asd",
-            pianist: "pfds",
-          },
-          url: {
-            original: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-            recompose: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-          },
-        });
-      }, 2000);
-    });
-  };
-
-  useEffect(async () => {
-    const res = await fetchData();
-    return setData(res);
+  useEffect(() => {
+    const db = firebase.firestore();
+    const user = JSON.parse(localStorage.getItem("band_user"));
+    const uid = user.uid;
+    console.log(user, uid);
+    db.collection("bands")
+      .doc("users")
+      .get()
+      .then(function (doc) {
+        if (doc.exists) {
+          const band = doc.data()[uid];
+          db.collection("bands")
+            .doc(band)
+            .get()
+            .then(function (doc) {
+              if (doc.exists) {
+                console.log(doc.data());
+                setBand(doc.data());
+              }
+            })
+            .catch(function (error) {
+              console.log("Error getting document:", error);
+            });
+        }
+      })
+      .catch(function (error) {
+        console.log("Error getting document:", error);
+      });
   }, []);
 
-  if (data.bandName)
+  if (band.bandName)
     return (
       <div>
-        <div>Band: {data.bandName}</div>
-        {Object.entries(data.member).map(([key, value]) => (
+        <div>Band: {band.bandName}</div>
+        {Object.entries(band.members).map(([key, value]) => (
           <li key={key}>
             {key}: {value}
           </li>
         ))}
-        <div>Original: {data.url.original}</div>
-        <div>Recompose: {data.url.recompose}</div>
+        <div>Original: {band.url.original}</div>
+        <div>Recompose: {band.url.recompose}</div>
+        <iframe
+          width="420"
+          height="315"
+          src="https://www.youtube.com/embed/tgbNymZ7vqY"
+        ></iframe>
       </div>
     );
   return <div>Loading...</div>;
