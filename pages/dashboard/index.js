@@ -2,8 +2,7 @@ import Head from "next/head";
 import Router from "next/router";
 import { useState, useEffect } from "react";
 import { firebase } from "../../config/firebase";
-
-import { BandInfo } from "./BandInfo/";
+import BandInfo from "./BandInfo/";
 
 const DashboardPage = () => {
   const user = firebase.auth().currentUser.displayName;

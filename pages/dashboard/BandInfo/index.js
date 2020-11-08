@@ -48,4 +48,4 @@ const BandInfo = () => {
   return <div>Loading...</div>;
 };
 
-export { BandInfo };
+export default BandInfo;

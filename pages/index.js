@@ -19,9 +19,7 @@ const LoginPage = () => {
           <button onClick={signout}>Signout</button>
         </div>
       ) : (
-        <button onClick={signin}>
-          Sign In {process.env.NEXT_PUBLIC_FIREBASE_API_KEY}
-        </button>
+        <button onClick={signin}>Sign In</button>
       )}
     </div>
   );
