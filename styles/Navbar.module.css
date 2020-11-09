@@ -23,11 +23,13 @@
 
 .navRight {
     margin-right: 30px;
+    height: 2.75em;
     gap: 16px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    font-size: 16px;
 }
 
 .profilePic {

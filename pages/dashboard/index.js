@@ -1,25 +1,27 @@
 import Head from "next/head";
-import Router from "next/router";
+import Link from "next/link";
 import { useState } from "react";
 import { firebase } from "../../config/firebase";
 import Navbar from "../../components/Navbar/";
+import styles from "../../styles/Dashboard.module.css";
 import BandInfo from "./BandInfo/";
 
 const DashboardPage = () => {
   return (
-    <div>
-      {
-        <div>
-          <Head>
-            <title>Dashboard</title>
-          </Head>
-          <Navbar></Navbar>
-          <main>
-            <BandInfo></BandInfo>
-            <BandForm></BandForm>
-          </main>
-        </div>
-      }
+    <div className={styles.container}>
+      <Head>
+        <title>Dashboard</title>
+      </Head>
+      <Navbar></Navbar>
+      <main className={styles.dashboardContainer}>
+        <BandInfo></BandInfo>
+      </main>
+      <footer>
+        PDS Student Committee 2020 | ⌨️ with ❤️ by{" "}
+        <Link href="https://github.com/pdscc/bandcontest">
+          <a>PDSCC</a>
+        </Link>
+      </footer>
     </div>
   );
 };

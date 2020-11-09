@@ -66,7 +66,11 @@ const Navbar = () => {
       </div>
       {user ? (
         <div className={styles.navRight}>
-          <div>{user.displayName}</div>
+          <Link href={Router.pathname === "/" ? "/dashboard" : "/"}>
+            <a className={styles.navLink}>
+              {Router.pathname === "/" ? "Dashboard" : "Home"}
+            </a>
+          </Link>
           <img src={user.photoURL} className={styles.profilePic}></img>
           <button onClick={signout} className={styles.logButton}>
             Logout

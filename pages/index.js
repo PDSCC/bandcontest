@@ -24,7 +24,9 @@ const LoginPage = () => {
       </section>
       <footer>
         PDS Student Committee 2020 | ⌨️ with ❤️ by{" "}
-        <Link href="https://github.com/pdscc/bandcontest">PDSCC</Link>
+        <Link href="https://github.com/pdscc/bandcontest">
+          <a>PDSCC</a>
+        </Link>
       </footer>
     </div>
   );

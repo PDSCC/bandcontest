@@ -1,0 +1,112 @@
+.container {
+  min-height: 100vh;
+  overflow-x: hidden; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dashboardContainer {
+  width: 80%;
+  margin-top: 30px;
+  padding-bottom: 30px;
+  display: flex;
+  flex-direction: left;
+}
+
+.infoContainer {
+  width: 100%;
+}
+
+.bandName {
+  font-weight: bold;
+  font-size: 50px;
+}
+
+.sectionHeader {
+  font-size: 30px;
+  padding-bottom: 5px;
+}
+
+.sectionContainer {
+  padding-top: 30px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 18px;
+}
+
+.member {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 10px;
+  flex-direction: row;
+  height: 50px;
+  width: 50%;
+}
+
+.memberContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  padding-right: auto;
+}
+
+.memberPic {
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 2rem;
+  border-radius: 50%;
+}
+
+.memberName {
+  display: flex;
+  align-items: center;
+  width: 75%;
+  height: 100%;
+}
+
+.memberRole {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 25%;
+  height: 100%;
+  background-color: #e0e0e0;
+  padding-right: 10px;
+}
+
+.memberAccept {
+  background-color: white;
+  border: 1px solid rgb(94, 194, 94);
+  height: 50px;
+  width: 50px;
+}
+
+.memberAccept:hover {
+  background-color: rgb(94, 194, 94);
+  border: 1px solid rgb(94, 194, 94);
+}
+
+.memberDelete {
+  background-color: white;
+  border: 1px solid #ff5555;
+  height: 50px;
+  width: 50px;
+}
+
+.memberDelete:hover {
+  background-color: #ff5555;
+  border: 1px solid #ff5555;
+}
+
+.bold {
+  font-weight: bold;
+}
