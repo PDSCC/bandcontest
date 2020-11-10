@@ -1,19 +1,21 @@
 .Navbar {
     width: 100%;
     height: 2.75em;
-    background-color: white;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #e0e0e0;
     font-weight: 500;
+    position: fixed;
+    color: white;
+    background-color: black;
+    z-index: 99;
 }
 
 .navLeft {
     margin-left: 30px;
     height: 2.75em;
-    gap: 16px;
+    column-gap: 16px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -24,12 +26,19 @@
 .navRight {
     margin-right: 30px;
     height: 2.75em;
-    gap: 16px;
+    column-gap: 16px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     font-size: 16px;
+}
+
+.rightGroup {
+    display: flex;
+    justify-content: center;
+    align-items: space-between;
+    column-gap: 16px;
 }
 
 .profilePic {
@@ -39,16 +48,30 @@
 
 .logButton {
     height: 2em;
-    border-radius: 10%;
-    border: 0;
+    border-radius: 5px;
     font-size: 14px;
-    background-color: white;
+    background-color: transparent;
+    color: white;
     border: 1px solid #e0e0e0;
 }
 
 .logButton:hover {
-    background-color: #f8f8f8;
+    color: black;
+    border: 1px solid transparent;
+	background-image: -webkit-linear-gradient(69deg, #00FF00, #00FFFF);
+    -webkit-animation: hue 20s infinite linear;
+    transform: scale(1.02);
+    transition: 0.2s;
 }
+
+@-webkit-keyframes hue {
+    from {
+      -webkit-filter: hue-rotate(0deg);
+    }
+    to {
+      -webkit-filter: hue-rotate(-360deg);
+    }
+  }
 
 .userState {
     display: flex;
@@ -64,5 +87,25 @@
 }
 
 .navLink:hover {
-    border-bottom: 2px solid #5a5a5a;
+    transition: 0.1s ease-in-out;
+    border-bottom: 2px solid  #00FFFF;
+}
+
+.color {
+    font-family: "aktiv grotesk ex";
+}
+
+.color:hover {
+    color: #00FFFF;
+    transition: 0.1s ease-in-out;
+}
+
+@media only screen and (max-width: 768px) {
+    .navLeft {
+        display: none;
+    }
+    .navRight {
+        width: 100%;
+        margin-left: 20px;
+    }
 }

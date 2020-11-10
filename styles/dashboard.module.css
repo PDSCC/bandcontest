@@ -4,14 +4,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-image: -webkit-linear-gradient(220deg, #222222, #000000);
+  color: white;
 }
 
 .dashboardContainer {
   width: 80%;
-  margin-top: 30px;
-  padding-bottom: 30px;
   display: flex;
   flex-direction: left;
+  padding-top: calc(2.75em + 40px);
 }
 
 .infoContainer {
@@ -21,15 +22,33 @@
 .bandName {
   font-weight: bold;
   font-size: 50px;
+  padding-bottom: 10px;
+  font-family: 'aktiv grotesk ex';
+	color: #FF00FF;
+	background-image: -webkit-linear-gradient(69deg, #00FF00, #00FFFF);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	-webkit-animation: hue 20s infinite linear;
+}
+
+@-webkit-keyframes hue {
+  from {
+    -webkit-filter: hue-rotate(0deg);
+  }
+  to {
+    -webkit-filter: hue-rotate(-360deg);
+  }
 }
 
 .sectionHeader {
   font-size: 30px;
   padding-bottom: 5px;
+  font-family: 'aktiv grotesk ex';
+  font-weight: light;
 }
 
 .sectionContainer {
-  padding-top: 30px;
+  padding-bottom: 30px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -37,11 +56,62 @@
   font-size: 18px;
 }
 
+.profileContainer {
+  padding-bottom: 10px;
+}
+
+.roleInput {
+  width: 50%;
+  height: 40px;
+}
+
+.roleText {
+  height: 100%;
+  width: 68%;
+  background-color: black;
+  color: white;
+  border: 1px solid hsl(0, 0%, 86%);
+  border-radius: 5px;
+  font-size: 18px;
+  margin-right: 2%;
+}
+
+.roleButton {
+  width: 30%;
+  height: 100%;
+  color: black;
+  border: 0;
+  border-radius: 5px;
+  font-size: 18px;
+  background-color: #00ff00;
+}
+
+.roleButton:hover {
+  background-color: #01da01;
+  transform: scale(1.01);
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.youtubeWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  column-gap: 16px;
+  font-size: 18px;
+}
+
+.video {
+  width: 32rem;
+  height: 24rem;
+  border: 0;
+}
+
 .member {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  gap: 10px;
+  column-gap: 2%;
   flex-direction: row;
   height: 50px;
   width: 50%;
@@ -54,7 +124,7 @@
   flex-direction: row;
   height: 100%;
   width: 100%;
-  border: 1px solid #e0e0e0;
+  border: 1px solid hsl(0, 0%, 86%);
   border-radius: 5px;
   padding-right: auto;
 }
@@ -71,42 +141,95 @@
   align-items: center;
   width: 75%;
   height: 100%;
+  margin-right: 2%;
 }
 
 .memberRole {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   width: 25%;
   height: 100%;
-  background-color: #e0e0e0;
-  padding-right: 10px;
+  border-radius: 5px;
+  background-color: #ff00ff;
 }
 
 .memberAccept {
-  background-color: white;
+  background-color: transparent;
   border: 1px solid rgb(94, 194, 94);
+  border-radius: 5px;
   height: 50px;
   width: 50px;
 }
 
 .memberAccept:hover {
-  background-color: rgb(94, 194, 94);
-  border: 1px solid rgb(94, 194, 94);
+  cursor: pointer;
+  border: 2px solid hsl(141, 53%, 53%);
+  transform: scale(1.01);
+  transition: 0.1s ease-in-out;
 }
 
 .memberDelete {
-  background-color: white;
-  border: 1px solid #ff5555;
+  background-color: transparent;
+  border: 1px solid hsl(348, 100%, 61%);
+  border-radius: 5px;
   height: 50px;
   width: 50px;
 }
 
 .memberDelete:hover {
-  background-color: #ff5555;
-  border: 1px solid #ff5555;
+  cursor: pointer;
+  border: 2px solid hsl(348, 100%, 61%);
+  transform: scale(1.01);
+  transition: 0.1s ease-in-out;
 }
 
 .bold {
   font-weight: bold;
+  padding-bottom: 5px;
+}
+
+.text{
+  padding-bottom: 5px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .bandName {
+    font-size: 46px;
+    padding-bottom: 0px;
+  }
+  .dashboardContainer {
+    width: 92%;
+  }
+  .sectionHeader {
+    font-size: 26px;
+  }
+  .sectionContainer {
+    padding-bottom: 20px;
+    font-size: 16px;
+  }
+  .roleInput {
+    width: 100%;
+  }
+  .member {
+    width: 100%;
+  }
+  .memberName {
+    width: 65%;
+  }
+  .memberRole {
+    width: 35%;
+    padding-right: 2px;
+  }
+  .youtubeWrapper {
+    flex-direction: column;
+  }
+  .video {
+    width: 100%;
+    height: 30vh;
+  }
+  .text {
+    font-size: 16px;
+    padding-bottom: 5px;
+  }
 }

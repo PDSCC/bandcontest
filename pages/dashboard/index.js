@@ -1,12 +1,56 @@
 import Head from "next/head";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { firebase } from "../../config/firebase";
-import Navbar from "../../components/Navbar/";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 import styles from "../../styles/Dashboard.module.css";
-import BandInfo from "./BandInfo/";
+import BandInfo from "./BandInfo";
+import Register from "./Register";
 
 const DashboardPage = () => {
+  let [userStates, setUserStates] = useState([]);
+  let [band, setBand] = useState({});
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("band_user"));
+    const email = user.email;
+    const uid = user.uid;
+    const db = firebase.firestore();
+    //todo .match
+    if (true) {
+      db.collection("bands")
+        .doc("users")
+        .get()
+        .then(function (doc) {
+          if (doc.exists) {
+            const band = doc.data()[uid];
+            if (band !== "") {
+              db.collection("bands")
+                .doc(band)
+                .get()
+                .then(function (doc) {
+                  if (doc.exists) {
+                    setBand(doc.data());
+                    setUserStates([email, uid, "registered"]);
+                  }
+                })
+                .catch(function (error) {
+                  console.log("Error getting document:", error);
+                });
+            } else {
+              setUserStates([email, uid, "no_band"]);
+              console.log([email, uid, "no_band"]);
+            }
+          }
+        })
+        .catch(function (error) {
+          console.log("Error getting document:", error);
+        });
+    } else {
+      setUserStates([email, uid, "registered"]);
+    }
+  }, []);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -14,14 +58,13 @@ const DashboardPage = () => {
       </Head>
       <Navbar></Navbar>
       <main className={styles.dashboardContainer}>
-        <BandInfo></BandInfo>
+        {userStates[2] === "registered" ? (
+          <BandInfo band={band} status={userStates}></BandInfo>
+        ) : (
+          <Register status={userStates}></Register>
+        )}
       </main>
-      <footer>
-        PDS Student Committee 2020 | ⌨️ with ❤️ by{" "}
-        <Link href="https://github.com/pdscc/bandcontest">
-          <a>PDSCC</a>
-        </Link>
-      </footer>
+      <Footer></Footer>
     </div>
   );
 };

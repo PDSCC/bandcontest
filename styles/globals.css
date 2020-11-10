@@ -1,9 +1,10 @@
+@import url("https://use.typekit.net/gic0mki.css");
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Neue Haas Grotesk Display', 'helvetica neue','Aktiv Grotesk Ex',-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica Neue, sans-serif;
 }
 
 a {
