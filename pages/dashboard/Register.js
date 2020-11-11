@@ -29,6 +29,21 @@ const Register = ({ status }) => {
       .catch(function (error) {});
   };
 
+  const backRestart = () => {
+    db.collection("bands")
+      .doc("users")
+      .set({ [status[2]]: "" }, { merge: true });
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        setUser(undefined);
+        localStorage.removeItem("band_user");
+        Router.push("/");
+      })
+      .catch(function (error) {});
+  };
+
   const create = () => {
     if (select === "not_selected") setSelect("create");
     else if (bandName !== "") {
@@ -178,17 +193,22 @@ const Register = ({ status }) => {
           </button>
         </div>
       );
-    else {
+    else if ((status[0] = "band_not_found")) {
       return (
         <div className={styles.registerContainer}>
-          <div className={styles.registerText}>
-            Unexpected error has occurred
-          </div>
-          <button className={styles.registerButton} onClick={back}>
-            Back
+          <div className={styles.registerText}>Error: Band Not Found</div>
+          <button className={styles.registerButton} onClick={backRestart}>
+            Restart
           </button>
         </div>
       );
+    } else {
+      <div className={styles.registerContainer}>
+        <div className={styles.registerText}>Unexpected Error</div>
+        <button className={styles.registerButton} onClick={backRestart}>
+          Restart
+        </button>
+      </div>;
     }
   } else {
     return (

@@ -39,7 +39,12 @@ const DashboardPage = () => {
                       setBandId(band);
                       setUserStates(["registered", displayName, uid, photo]);
                     } else {
-                      setUserStates(["error", displayName, uid, photo]);
+                      setUserStates([
+                        "band_not_found",
+                        displayName,
+                        uid,
+                        photo,
+                      ]);
                     }
                   })
                   .catch(function (error) {

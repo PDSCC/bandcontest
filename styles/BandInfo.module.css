@@ -103,7 +103,8 @@
 .video {
     width: 32rem;
     height: 24rem;
-    border: 0;
+    border: 1px solid white;
+    border-radius: 5px;
 }
 
 .videoInput {

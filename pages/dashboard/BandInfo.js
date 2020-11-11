@@ -33,7 +33,7 @@ const BandInfo = ({ band, status, bandId }) => {
 
   const leaveBand = () => {
     if (confirm(`Are you sure you want to leave this band?`)) {
-      if (user !== undefined)
+      if (user !== undefined) {
         db.collection("bands")
           .doc(bandId)
           .set(
@@ -44,11 +44,20 @@ const BandInfo = ({ band, status, bandId }) => {
             },
             { merge: true }
           );
-      db.collection("bands")
-        .doc("users")
-        .set({ [user.uid]: "" }, { merge: true });
-      if (Object.keys(band.roles).length === 1)
-        db.collection("bands").doc(bandId).delete();
+
+        db.collection("bands")
+          .doc(bandId)
+          .get()
+          .then((doc) => {
+            if (Object.keys(doc.data().roles).length === 0)
+              db.collection("bands").doc(bandId).delete();
+          });
+
+        db.collection("bands")
+          .doc("users")
+          .set({ [user.uid]: "" }, { merge: true });
+      }
+
       Router.push("/");
     }
   };
