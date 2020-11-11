@@ -3,9 +3,10 @@ import styles from "../styles/Footer.module.css";
 
 const Footer = () => (
   <footer className={styles.footer}>
-    PDS Band Contest Team | ⌨️ with ❤️ by{" "}
+    ©2020 PDS Band Contest Team <br />
+    ⌨️ with ❤️ by PDS Computer Club <br />
     <Link href="https://github.com/pdscc/bandcontest">
-      <a>PDSCC</a>
+      <a style={{ color: "yellow" }}>Source Code Available on Github</a>
     </Link>
   </footer>
 );

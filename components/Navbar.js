@@ -12,6 +12,9 @@ const Navbar = () => {
 
   const signin = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
+    provider.setCustomParameters({
+      prompt: "select_account",
+    });
     firebase
       .auth()
       .signInWithPopup(provider)
@@ -53,10 +56,10 @@ const Navbar = () => {
             PDS Band Contest 2020
           </a>
         </Link>
-        <Link href="/">
-          <a className={styles.navLink}>Band</a>
+        <Link href="/#timeline">
+          <a className={styles.navLink}>Timeline</a>
         </Link>
-        <Link href="/">
+        <Link href="/#about">
           <a className={styles.navLink}>About</a>
         </Link>
       </div>

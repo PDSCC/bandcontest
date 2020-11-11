@@ -1,15 +1,18 @@
 import { useState, useEffect } from "react";
 import { firebase } from "../../config/firebase";
-import styles from "../../styles/Dashboard.module.css";
+import styles from "../../styles/BandInfo.module.css";
 
 const BandInfo = ({ band, userState }) => {
   const [user, setUser] = useState({});
+
   useEffect(() => {
     const localStorageUser = JSON.parse(localStorage.getItem("band_user"));
     setUser(localStorageUser);
   }, []);
 
-  if (band.bandName)
+  console.log(band, userState);
+
+  if (band)
     return (
       <div className={styles.infoContainer}>
         <div className={styles.bandName}>Profile</div>
@@ -63,7 +66,7 @@ const BandInfo = ({ band, userState }) => {
                 <div className={styles.memberName}>{value.displayName}</div>
               </div>
               <div className={styles.memberRole}>{value.role}</div>
-              <button className={styles.memberDelete}>❌</button>
+              <button className={styles.memberDelete}>X</button>
             </div>
           ))}
         </div>
@@ -100,8 +103,8 @@ const BandInfo = ({ band, userState }) => {
                   <div className={styles.memberName}>{value.displayName}</div>
                 </div>
                 <div className={styles.memberRole}>{value.role}</div>
-                <button className={styles.memberAccept}>✅</button>
-                <button className={styles.memberDelete}>❌</button>
+                <button className={styles.memberAccept}>O</button>
+                <button className={styles.memberDelete}>X</button>
               </div>
             ))
           ) : (

@@ -1,0 +1,273 @@
+.infoContainer {
+    width: 100%;
+}
+
+.bandName {
+    font-weight: bold;
+    font-size: 50px;
+    padding-bottom: 10px;
+    font-family: aktiv-grotesk-extended, "helvetica neue", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+    color: #FF00FF;
+    background-image: -webkit-linear-gradient(69deg, #00FF00, #00FFFF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: hue 20s infinite linear;
+}
+
+@-webkit-keyframes hue {
+    from {
+        -webkit-filter: hue-rotate(0deg);
+    }
+
+    to {
+        -webkit-filter: hue-rotate(-360deg);
+    }
+}
+
+.sectionHeader {
+    font-size: 30px;
+    padding-bottom: 5px;
+    font-family: aktiv-grotesk-extended, "Helvetica Neue", -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif;
+    font-weight: light;
+}
+
+.sectionContainer {
+    padding-bottom: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+}
+
+.profileContainer {
+    padding-bottom: 10px;
+}
+
+.roleInput {
+    width: 50%;
+    height: 40px;
+}
+
+.roleText {
+    height: 100%;
+    width: 65%;
+    background-color: black;
+    color: white;
+    border: 1px solid hsl(0, 0%, 86%);
+    border-radius: 5px;
+    font-size: 18px;
+    margin-right: 8px;
+    font-family: aktiv-grotesk-extended, "helvetica neue", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+}
+
+.roleButton {
+    width: 30%;
+    height: 100%;
+    color: white;
+    border: 0;
+    border-radius: 5px;
+    font-size: 18px;
+    background-image: -webkit-linear-gradient(69deg, #93278F, #2E3192);
+    margin-left: 8px;
+    font-weight: bold;
+    font-family: aktiv-grotesk-extended, "helvetica neue", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+}
+
+.roleButton:hover {
+    transform: scale(1.01);
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.youtubeWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    font-size: 18px;
+}
+
+.video {
+    width: 32rem;
+    height: 24rem;
+    border: 0;
+}
+
+.member {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    height: 50px;
+    width: 60%;
+    margin: 8px 0px;
+}
+
+.memberContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+    border: 1px solid hsl(0, 0%, 86%);
+    border-radius: 5px;
+    padding-right: auto;
+    margin: 0px 8px;
+}
+
+.memberPic {
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 2rem;
+    border-radius: 50%;
+}
+
+.memberName {
+    display: flex;
+    align-items: center;
+    width: 75%;
+    height: 100%;
+    margin-right: 2%;
+}
+
+.memberRole {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+    height: 100%;
+    border-radius: 5px;
+    margin: 0px 8px;
+    background-image: -webkit-linear-gradient(140deg, #C1272D, #FF931E);
+}
+
+.memberAccept {
+    color: white;
+    background-color: rgb(94, 194, 94);
+    border: 0;
+    border-radius: 5px;
+    height: 50px;
+    width: 50px;
+    margin: 0px 8px;
+    font-weight: bold;
+}
+
+.memberAccept:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+    transition: 0.1s ease-in-out;
+}
+
+.memberDelete {
+    color: white;
+    background-color: hsl(348, 100%, 61%);
+    border: 0;
+    border-radius: 5px;
+    height: 50px;
+    width: 50px;
+    margin-left: 8px;
+    font-weight: bold;
+}
+
+.memberDelete:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+    transition: 0.1s ease-in-out;
+}
+
+.bold {
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+
+.text {
+    padding-bottom: 5px;
+}
+
+
+@media only screen and (max-width: 1024px) {
+    .bandName {
+        font-size: 46px;
+        padding-bottom: 0px;
+    }
+
+    .sectionHeader {
+        font-size: 26px;
+    }
+
+    .sectionContainer {
+        padding-bottom: 20px;
+        font-size: 16px;
+    }
+
+    .roleInput {
+        width: 100%;
+    }
+
+    .roleText {
+        width: 67.5%;
+        margin-right: 4px;
+    }
+
+    .roleButton {
+        margin-left: 4px;
+    }
+
+    .member {
+        width: 100%;
+    }
+
+    .memberName {
+        width: 65%;
+    }
+
+    .memberRole {
+        width: 35%;
+        margin: 0px 4px;
+    }
+
+    .memberContainer {
+        margin: 0px 4px;
+    }
+
+    .youtubeWrapper {
+        flex-direction: column;
+    }
+
+    .video {
+        width: 100%;
+        height: 30vh;
+    }
+
+    .text {
+        font-size: 16px;
+        padding-bottom: 5px;
+    }
+
+    .memberAccept {
+        margin: 0px 4px;
+    }
+
+    .memberDelete {
+        margin-left: 4px;
+    }
+
+    .registerText {
+        font-size: 1.5rem;
+    }
+}
+
+@media only screen and (max-width: 414px) {
+    .roleButton {
+        font-size: 14px;
+    }
+    .sectionHeader {
+        font-size: 20px;
+    }
+    .sectionContainer {
+        font-size: 12px;
+    }
+    .roleButton {
+        margin-left: 2px;
+    }
+}

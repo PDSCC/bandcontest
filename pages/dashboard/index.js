@@ -9,37 +9,39 @@ import BandInfo from "./BandInfo";
 import Register from "./Register";
 
 const DashboardPage = () => {
-  let [userStates, setUserStates] = useState([]);
+  let [userStates, setUserStates] = useState(["not_done", ""]);
   let [band, setBand] = useState({});
+
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("band_user"));
+    const displayName = user.displayName;
     const email = user.email;
     const uid = user.uid;
     const db = firebase.firestore();
-    //todo .match
-    if (true) {
+    const match = email.match(/@satitpatumwan.ac.th/);
+    if (match !== null) {
       db.collection("bands")
         .doc("users")
         .get()
         .then(function (doc) {
           if (doc.exists) {
             const band = doc.data()[uid];
-            if (band !== "") {
+            if (band !== undefined) {
               db.collection("bands")
                 .doc(band)
                 .get()
                 .then(function (doc) {
                   if (doc.exists) {
                     setBand(doc.data());
-                    setUserStates([email, uid, "registered"]);
+                    setUserStates(["registered", displayName]);
+                    console.log(userStates);
                   }
                 })
                 .catch(function (error) {
                   console.log("Error getting document:", error);
                 });
             } else {
-              setUserStates([email, uid, "no_band"]);
-              console.log([email, uid, "no_band"]);
+              setUserStates(["no_band", displayName]);
             }
           }
         })
@@ -47,7 +49,8 @@ const DashboardPage = () => {
           console.log("Error getting document:", error);
         });
     } else {
-      setUserStates([email, uid, "registered"]);
+      setUserStates(["not_school_email", displayName]);
+      console.log(userStates);
     }
   }, []);
 
@@ -58,7 +61,7 @@ const DashboardPage = () => {
       </Head>
       <Navbar></Navbar>
       <main className={styles.dashboardContainer}>
-        {userStates[2] === "registered" ? (
+        {userStates[0] === "registered" ? (
           <BandInfo band={band} status={userStates}></BandInfo>
         ) : (
           <Register status={userStates}></Register>

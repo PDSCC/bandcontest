@@ -4,12 +4,41 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: white;
+    background-color: black;
+}
+
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2.75vh;
+    height: 100vh;
+    width: 100%;
+    background-image: url("../pdsbandcontest.gif");
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
 }
 
 .header {
     font-size: 80px;
     font-weight: bold;
-    margin-top: 30px;
+    font-family: 'aktiv grotesk ex';
+	color: #FF00FF;
+	background-image: -webkit-linear-gradient(69deg, #00FF00, #00FFFF);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	-webkit-animation: hue 20s infinite linear;
+}
+
+@-webkit-keyframes hue {
+  from {
+    -webkit-filter: hue-rotate(0deg);
+  }
+  to {
+    -webkit-filter: hue-rotate(-360deg);
+  }
 }
 
 .sectionHeader {
