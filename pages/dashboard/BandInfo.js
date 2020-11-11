@@ -208,7 +208,11 @@ const BandInfo = ({ band, status, bandId }) => {
               <div className={styles.bold}>Original</div>
               <iframe
                 className={styles.video}
-                src={originalVideo.split("/watch?v=").join("/embed/")}
+                src={
+                  originalVideo.match(/youtu.be/)
+                    ? originalVideo.split("youtu.be").join("youtube.com/embed/")
+                    : originalVideo.split("/watch?v=").join("/embed/")
+                }
               ></iframe>
               <div className={styles.videoInput}>
                 <input
@@ -275,7 +279,7 @@ const BandInfo = ({ band, status, bandId }) => {
         <div className={styles.sectionContainer}>
           <div className={styles.profileContainer}>
             <div className={styles.roleInput}>
-              <button className={styles.roleButton} onClick={leaveBand}>
+              <button className={styles.leaveButton} onClick={leaveBand}>
                 Leave Band
               </button>
             </div>
