@@ -15,7 +15,7 @@ const LoginPage = () => {
       </Head>
       <Navbar></Navbar>
       <div className={styles.hero}></div>
-      <button>Register Now!</button>
+      {/* <button>Register Now!</button>
       <section>
         <header className={styles.header}></header>
         <h2 className={styles.sectionHeader} id="timeline">
@@ -34,7 +34,7 @@ const LoginPage = () => {
         <h2 className={styles.sectionHeader} id="about">
           About
         </h2>
-      </section>
+      </section> */}
       <Footer></Footer>
     </div>
   );

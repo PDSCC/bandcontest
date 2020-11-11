@@ -1,16 +1,124 @@
+import Router from "next/router";
 import { useState, useEffect } from "react";
 import { firebase } from "../../config/firebase";
 import styles from "../../styles/BandInfo.module.css";
 
-const BandInfo = ({ band, userState }) => {
+const BandInfo = ({ band, status, bandId }) => {
+  const db = firebase.firestore();
+
   const [user, setUser] = useState({});
+
+  const [role, setRole] = useState("");
+  const [changeRoleVar, setChangeRole] = useState("");
+
+  const [bandName, setBandName] = useState("");
+  const [changeBandNameVar, setChangeBandName] = useState("");
+
+  const [originalVideo, setOriginalVideo] = useState("");
+  const [rearrangeVideo, setRearrangeVideo] = useState("");
+
+  const [changeOriginalVideoVar, setChangeOriginalVideo] = useState("");
+  const [changeRearrangeVideoVar, setChangeRearrangeVideo] = useState("");
 
   useEffect(() => {
     const localStorageUser = JSON.parse(localStorage.getItem("band_user"));
+    setBandName(band.bandName);
+    setOriginalVideo(band.url.original);
+    setRearrangeVideo(band.url.rearrange);
+    setChangeOriginalVideo(band.url.original);
+    setChangeRearrangeVideo(band.url.rearrange);
     setUser(localStorageUser);
+    setRole(band.roles[status[2]].role);
   }, []);
 
-  console.log(band, userState);
+  const leaveBand = () => {
+    if (confirm(`Are you sure you want to leave this band?`)) {
+      if (user !== undefined)
+        db.collection("bands")
+          .doc(bandId)
+          .set(
+            {
+              roles: {
+                [user.uid]: firebase.firestore.FieldValue.delete(),
+              },
+            },
+            { merge: true }
+          );
+      db.collection("bands")
+        .doc("users")
+        .set({ [user.uid]: "" }, { merge: true });
+      if (Object.keys(band.roles).length === 1)
+        db.collection("bands").doc(bandId).delete();
+      Router.push("/");
+    }
+  };
+
+  const changeRole = () => {
+    if (confirm(`Are you sure you want to change your role?`)) {
+      const uid = user.uid;
+      db.collection("bands")
+        .doc(bandId)
+        .set(
+          {
+            roles: {
+              [uid]: {
+                profilePic: user.photoURL,
+                displayName: user.displayName,
+                role: changeRoleVar,
+              },
+            },
+          },
+          { merge: true }
+        );
+      console.log(band);
+      setRole(changeRoleVar);
+    }
+    setChangeRole("");
+  };
+
+  const changeOriginalVideo = () => {
+    if (confirm(`Are you sure you want to change a video link?`)) {
+      db.collection("bands")
+        .doc(bandId)
+        .set(
+          {
+            url: {
+              original: changeOriginalVideoVar,
+            },
+          },
+          { merge: true }
+        );
+      console.log(band);
+    }
+    setOriginalVideo(changeOriginalVideoVar);
+  };
+
+  const changeRearrangeVideo = () => {
+    if (confirm(`Are you sure you want to change a video link?`)) {
+      db.collection("bands")
+        .doc(bandId)
+        .set(
+          {
+            url: {
+              rearrange: changeRearrangeVideoVar,
+            },
+          },
+          { merge: true }
+        );
+      console.log(band);
+    }
+    setRearrangeVideo(changeRearrangeVideoVar);
+  };
+
+  const changeBandName = () => {
+    if (confirm(`Are you sure you want to change your band's name?`)) {
+      db.collection("bands")
+        .doc(bandId)
+        .set({ bandName: changeBandNameVar }, { merge: true });
+      setBandName(changeBandNameVar);
+    }
+    setChangeBandName("");
+  };
 
   if (band)
     return (
@@ -28,32 +136,44 @@ const BandInfo = ({ band, userState }) => {
               <span className={styles.bold}>User ID:</span> {user.uid}
             </div>
             <div className={styles.text}>
-              <span className={styles.bold}>Role:</span> {"hello"}
+              <span className={styles.bold}>Role:</span>{" "}
+              {role || "N/A (Please add your role)"}
             </div>
-            <div className={styles.sectionHeader}>Change Role</div>
+            <div className={styles.sectionHeader}>Change your role</div>
             <div className={styles.roleInput}>
               <input
                 type="text"
-                name="hello"
                 className={styles.roleText}
-                placeholder="Change Role"
+                placeholder="Change role"
+                onChange={(e) => setChangeRole(e.target.value)}
+                value={changeRoleVar}
               />
-              <button className={styles.roleButton}>Change</button>
+              <button className={styles.roleButton} onClick={changeRole}>
+                Change
+              </button>
             </div>
           </div>
         </div>
 
-        <div className={styles.bandName}>{band.bandName}</div>
+        <div className={styles.bandName}>{bandName}</div>
         <div className={styles.sectionContainer}>
-          <span className={styles.sectionHeader}>Change Band's Name</span>
+          <div className={styles.profileContainer}>
+            <div className={styles.text}>
+              <span className={styles.bold}>Band ID:</span> {bandId}
+            </div>
+          </div>
+          <span className={styles.sectionHeader}>Change band's name</span>
           <div className={styles.roleInput}>
             <input
               type="text"
-              name="hello"
               className={styles.roleText}
-              placeholder="Change Band's Name"
+              placeholder="Change band's name"
+              onChange={(e) => setChangeBandName(e.target.value)}
+              value={changeBandNameVar}
             />
-            <button className={styles.roleButton}>Change</button>
+            <button className={styles.roleButton} onClick={changeBandName}>
+              Change
+            </button>
           </div>
         </div>
 
@@ -65,32 +185,64 @@ const BandInfo = ({ band, userState }) => {
                 <img src={value.profilePic} className={styles.memberPic}></img>
                 <div className={styles.memberName}>{value.displayName}</div>
               </div>
-              <div className={styles.memberRole}>{value.role}</div>
-              <button className={styles.memberDelete}>X</button>
+              <div className={styles.memberRole}>
+                {key === user.uid ? role || "N/A" : value.role || "N/A"}
+              </div>
             </div>
           ))}
         </div>
 
         <div className={styles.sectionContainer}>
           <div className={styles.sectionHeader}>Song</div>
-          <div className={styles.youtubeWrapper}>
-            <div>
+          <div className={styles.youtubeContainer}>
+            <div className={styles.videoContainer}>
               <div className={styles.bold}>Original</div>
               <iframe
                 className={styles.video}
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                src={originalVideo.split("/watch?v=").join("/embed/")}
               ></iframe>
+              <div className={styles.videoInput}>
+                <input
+                  type="text"
+                  className={styles.roleText}
+                  placeholder="Change original video"
+                  onChange={(e) => setChangeOriginalVideo(e.target.value)}
+                  value={changeOriginalVideoVar}
+                />
+                <button
+                  className={styles.videoButton}
+                  onClick={changeOriginalVideo}
+                >
+                  Change
+                </button>
+              </div>
             </div>
-            <div>
+            <div className={styles.videoContainer}>
               <div className={styles.bold}>Rearrange</div>
               <iframe
                 className={styles.video}
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                src={rearrangeVideo.split("/watch?v=").join("/embed/")}
               ></iframe>
+              <div className={styles.videoInput}>
+                <input
+                  type="text"
+                  className={styles.roleText}
+                  placeholder="Change rearranged video"
+                  onChange={(e) => setChangeRearrangeVideo(e.target.value)}
+                  value={changeRearrangeVideoVar}
+                />
+                <button
+                  className={styles.videoButton}
+                  onClick={changeRearrangeVideo}
+                >
+                  Change
+                </button>
+              </div>
             </div>
           </div>
         </div>
-        <div className={styles.sectionContainer}>
+
+        {/* <div className={styles.sectionContainer}>
           <div className={styles.sectionHeader}>Request</div>
           {band.requests ? (
             Object.entries(band.requests).map(([key, value]) => (
@@ -102,7 +254,6 @@ const BandInfo = ({ band, userState }) => {
                   ></img>
                   <div className={styles.memberName}>{value.displayName}</div>
                 </div>
-                <div className={styles.memberRole}>{value.role}</div>
                 <button className={styles.memberAccept}>O</button>
                 <button className={styles.memberDelete}>X</button>
               </div>
@@ -110,6 +261,16 @@ const BandInfo = ({ band, userState }) => {
           ) : (
             <div className={styles.bold}>🤖 No New Request</div>
           )}
+        </div> */}
+
+        <div className={styles.sectionContainer}>
+          <div className={styles.profileContainer}>
+            <div className={styles.roleInput}>
+              <button className={styles.roleButton} onClick={leaveBand}>
+                Leave Band
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -117,9 +278,3 @@ const BandInfo = ({ band, userState }) => {
 };
 
 export default BandInfo;
-
-/* <iframe
-width="420"
-height="315"
-src="https://www.youtube.com/embed/tgbNymZ7vqY"
-></iframe> */

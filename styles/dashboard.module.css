@@ -1,22 +1,30 @@
 .container {
   min-height: 100vh;
-  overflow-x: hidden; 
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-image: -webkit-linear-gradient(220deg, #222222, #000000);
+  background-size: 400% 400%;
   color: white;
+  -webkit-animation: hue 15s infinite linear;
 }
 
-.dashboardContainer {
-  width: 80%;
-  display: flex;
-  flex-direction: left;
-  padding-top: calc(2.75em + 40px);
+@-webkit-keyframes hue {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
 
-@media only screen and (max-width: 1024px) {
   .dashboardContainer {
-    width: 92%;
+    width: 80%;
+    display: flex;
+    flex-direction: left;
+    padding-top: calc(2.75em + 40px);
   }
-}
+
+  @media only screen and (max-width: 1024px) {
+    .dashboardContainer {
+      width: 92%;
+    }
+  }
