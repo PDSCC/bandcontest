@@ -193,12 +193,23 @@ const Register = ({ status }) => {
           </button>
         </div>
       );
-    else if ((status[0] = "band_not_found")) {
+    else if (status[0] === "band_not_found") {
       return (
         <div className={styles.registerContainer}>
           <div className={styles.registerText}>Error: Band Not Found</div>
           <button className={styles.registerButton} onClick={backRestart}>
             Restart
+          </button>
+        </div>
+      );
+    } else if (status[0] === "admin") {
+      return (
+        <div className={styles.registerContainer}>
+          <div className={styles.registerText}>
+            สวัสดีครับแอดมิน ไปเข้าเว็บแอดมินสิไอโง่
+          </div>
+          <button className={styles.registerButton} onClick={back}>
+            Sign Out
           </button>
         </div>
       );

@@ -30,26 +30,30 @@ const DashboardPage = () => {
             if (doc.exists) {
               const band = doc.data()[uid];
               if (band !== undefined && band !== "") {
-                db.collection("bands")
-                  .doc(band)
-                  .get()
-                  .then(function (doc) {
-                    if (doc.exists) {
-                      setBand(doc.data());
-                      setBandId(band);
-                      setUserStates(["registered", displayName, uid, photo]);
-                    } else {
-                      setUserStates([
-                        "band_not_found",
-                        displayName,
-                        uid,
-                        photo,
-                      ]);
-                    }
-                  })
-                  .catch(function (error) {
-                    console.log("Error getting document:", error);
-                  });
+                if (band === "admin") {
+                  setUserStates(["admin", displayName, uid, photo]);
+                } else {
+                  db.collection("bands")
+                    .doc(band)
+                    .get()
+                    .then(function (doc) {
+                      if (doc.exists) {
+                        setBand(doc.data());
+                        setBandId(band);
+                        setUserStates(["registered", displayName, uid, photo]);
+                      } else {
+                        setUserStates([
+                          "band_not_found",
+                          displayName,
+                          uid,
+                          photo,
+                        ]);
+                      }
+                    })
+                    .catch(function (error) {
+                      console.log("Error getting document:", error);
+                    });
+                }
               } else {
                 let create = {};
                 create[uid] = "";
