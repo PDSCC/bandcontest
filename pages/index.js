@@ -21,8 +21,39 @@ const LoginPage = () => {
         <h2 className={styles.sectionHeader} id="timeline">
           Timeline
         </h2>
-        <p>11-23 November 2020 | Audition Round Video Submission</p>
+        <p>11-25 November 2020 | Audition Round Video Submission</p>
         <p>27 November 2020 | Audition Round Result Announcement</p>
+        <p>2-3 December 2020 | Live Play Round</p>
+        <p>23 December 2020 | Final Round</p>
+        <p></p>
+      </section>
+      <section>
+        <h2 className={styles.sectionHeader} id="Rules">
+          Rules
+        </h2>
+        <p>Scoring Criteria</p>
+        <p><dd>Overall Score</dd></p>
+        <p><dd>Rhythm 5 points</dd></p>
+        <p><dd>Unity 5 points</dd></p>
+        <p><dd>Mood 5 points</dd></p>
+        <p><dd>Skill 5 points</dd></p>
+        <p></p>
+        <p>Points from EACH video.</p>
+        <p><dd>Original video: Detail 5 points</dd></p>
+        <p><dd>Rearrange video: Individuality 5 points</dd></p>
+        <p></p>
+        <p>Total score 30 points</p>
+        <p></p>
+      </section>
+      <section>
+        <h2 className={styles.sectionHeader} id="Reward">
+          Reward
+        </h2>
+        <p>1st 3000 ฿</p>
+        <p>2nd 2000 ฿</p>
+        <p>3rd 1000 ฿</p>
+        <p></p>
+        <p>#All bands participating in the Live Play Round will be awarded a certificate for entering the contest.</p>
         <p></p>
       </section>
       <section>
